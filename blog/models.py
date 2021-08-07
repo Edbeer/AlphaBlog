@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 """
 Post: (title, slug, content, photo, created_at, views, is_published)
@@ -14,6 +15,9 @@ class Post(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     is_published = models.BooleanField(default=True)
     views = models.IntegerField(default=0)
+
+    def get_absolute_url(self):
+        return reverse('post', kwargs={"slug": self.slug,})
 
     def __str__(self):
         return self.title
