@@ -19,7 +19,7 @@
         <img class="mr-3 img-fluid post-thumb d-none d-md-flex" src="{% static 'assets/images/blog/blog-post-thumb-1.jpg' %}" alt="image">
         {% endif %}
       </figure>
-      <p>{{ post.title }}</p>
+      <p>{{ post.content|safe }}</p>
 
   </div>
 

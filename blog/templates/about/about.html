@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<article class="blog-post px-3 py-5 p-md-5">
+  <div class="container">
+    <header class="blog-post-header">
+      <h2 class="title mb-2">{{ flatpage.title }}</h2>
+    </header>
+
+    <div class="blog-post-body">
+      <p>{{ flatpage.content|safe }}</p>
+  </div>
+  </div><!--//container-->
+</article>
+{% endblock %}
