@@ -1,6 +1,8 @@
 from django.contrib import admin
 from django import forms
 from ckeditor_uploader.widgets import CKEditorUploadingWidget
+from django.contrib.flatpages.models import FlatPage
+from django.contrib.flatpages.admin import FlatPageAdmin
 from django.utils.safestring import mark_safe
 
 from .models import *
@@ -42,7 +44,24 @@ class CommentAdmin(admin.ModelAdmin):
     search_fields = ('name',)
 
 
+class FlatPageAdmin(FlatPageAdmin):
+    form = PostAdminForm
+    fieldsets = (
+        (None, {'fields': ('url', 'title', 'content', 'sites')}),
+        (('Advanced options'), {
+            'classes': ('collapse',),
+            'fields': (
+                'enable_comments',
+                'registration_required',
+                'template_name',
+            ),
+        }),
+    )
+
+
 admin.site.register(Post, PostAdmin)
 admin.site.register(Comment, CommentAdmin)
+admin.site.unregister(FlatPage)
+admin.site.register(FlatPage, FlatPageAdmin)
 
 

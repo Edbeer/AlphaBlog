@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
 <article class="blog-post px-3 py-5 p-md-5">
@@ -6,7 +7,9 @@
     <header class="blog-post-header">
       <h2 class="title mb-2">{{ flatpage.title }}</h2>
     </header>
-
+     <figure class="blog-banner">
+        <img class="mr-3 img-fluid post-thumb d-none d-md-flex" src="{% static 'assets/images/blog/blog-post-thumb-1.jpg' %}" alt="image">
+      </figure>
     <div class="blog-post-body">
       <p>{{ flatpage.content|safe }}</p>
   </div>
