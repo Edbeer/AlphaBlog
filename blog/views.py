@@ -4,6 +4,14 @@ from django.views.generic import ListView, DetailView
 from .models import *
 
 
+def register(request):
+    return render(request, 'blog/register.html')
+
+
+def login(request):
+    return render(request, 'blog/login.html')
+
+
 class Home(ListView):
     model = Post
     template_name = 'blog/index.html'
