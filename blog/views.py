@@ -1,15 +1,8 @@
 from django.db.models import F
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic import ListView, DetailView
 from .models import *
-
-
-def register(request):
-    return render(request, 'blog/register.html')
-
-
-def login(request):
-    return render(request, 'blog/login.html')
+from .forms import *
 
 
 class Home(ListView):
@@ -35,3 +28,14 @@ class GetPost(DetailView):
         self.object.save()
         self.object.refresh_from_db()
         return context
+
+
+def add_post(request):
+    if request.method == 'POST':
+        form = BlogForm(request.POST)
+        if form.is_valid():
+            Post.objects.create(**form.cleaned_data)
+            return redirect('home')
+    else:
+        form = BlogForm()
+    return render(request, 'blog/add_post.html', {'form': form})
