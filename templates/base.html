@@ -53,11 +53,15 @@
 					    <a class="nav-link" href="{% url 'about' %}"><i class="fas fa-user fa-fw mr-2"></i>About Me</a>
 					</li>
 				</ul>
-
+				{% if request.user.is_authenticated %}
+				Welcome, {{ user.username }}
+				<a class="btn btn-primary" href="{% url 'logout' %}" target="_blank">Logout</a>
+				{% else %}
 				<div class="my-2 my-md-3">
 				    <a class="btn btn-primary" href="{% url 'login' %}" target="_blank">Login</a> <a class="btn btn-primary" href="{% url 'register' %}" target="_blank">Register</a>
 				</div>
-				{% if request.user.is_authenticated %}
+				{% endif %}
+				{% if request.user.is_superuser %}
 				<div class="my-2 my-md-3">
 					<a class="btn btn-primary" href="{% url 'add_post' %}" target="_blank">Add post</a>
 				</div>

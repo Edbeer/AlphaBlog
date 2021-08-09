@@ -4,6 +4,7 @@ from django.views.generic import ListView, DetailView
 from django.contrib import messages
 from .models import *
 from .forms import *
+from django.contrib.auth import login, logout
 
 
 def register(request):
@@ -20,8 +21,16 @@ def register(request):
     return render(request, 'blog/register.html', {"form": form})
 
 
-def login(request):
-    return render(request, 'blog/login.html')
+def user_login(request):
+    if request.method == 'POST':
+        form = UserLoginForm(data=request.POST)
+        if form.is_valid():
+            user = form.get_user()
+            login(request, user)
+            return redirect('home')
+    else:
+        form = UserLoginForm()
+    return render(request, 'blog/login.html', {'form': form})
 
 
 class Home(ListView):
