@@ -33,6 +33,11 @@ def user_login(request):
     return render(request, 'blog/login.html', {'form': form})
 
 
+def user_logout(request):
+    logout(request)
+    return redirect('login')
+
+
 class Home(ListView):
     model = Post
     template_name = 'blog/index.html'
