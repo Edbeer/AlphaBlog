@@ -1,8 +1,28 @@
 from django.db.models import F
 from django.shortcuts import render, redirect
 from django.views.generic import ListView, DetailView
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib import messages
 from .models import *
 from .forms import *
+
+
+def register(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Successfully')
+            return redirect('login')
+        else:
+            messages.error(request, 'Error')
+    else:
+        form = UserCreationForm()
+    return render(request, 'blog/register.html', {"form": form})
+
+
+def login(request):
+    return render(request, 'blog/login.html')
 
 
 class Home(ListView):

@@ -1,10 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Login :: {{ block.super }} {% endblock %}
 
-</body>
-</html>
+{% block content %}
+<section class="blog-list px-3 py-5 p-md-5">
+    <div class="container">
+        <div class="item mb-5">
+
+            <h1>login</h1>
+            <form action="{% url 'login' %}" method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+
+                <button type="submit" class="btn btn-primary btn-block">Login</button>
+            </form>
+
+        </div>
+
+    </div>
+</section>
+{% endblock %}
